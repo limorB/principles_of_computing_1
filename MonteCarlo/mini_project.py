@@ -7,8 +7,6 @@ import random
 import poc_ttt_provided as provided
 
 # Constants for Monte Carlo simulator
-# You may change the values of these constants as desired, but
-#  do not change their names.
 NTRIALS = 1000  # Number of trials to run
 SCORE_CURRENT = 1.0  # Score for squares played by the current player
 SCORE_OTHER = 1.0  # Score for squares played by the other player
@@ -20,9 +18,6 @@ DRAW = 4
 #board = provided.TTTBoard(3, reverse=False)
 
 
-
-
-# Add your functions here.
 def pick_random_move(board):
     """ randomly picks an empty square """
     empty_squares_list = board.get_empty_squares()
@@ -60,7 +55,6 @@ def mc_update_scores(scores, board, player):
     """ score the completed board and update the scores grid """
     list_board = create_board_as_list(board)
     winner = board.check_win()
-    # print(list_board)
     if winner == player:
         for row_index, row in enumerate(list_board):
             for item_index, item in enumerate(row):
@@ -69,7 +63,7 @@ def mc_update_scores(scores, board, player):
                 if item != player and item != EMPTY:
                     scores[row_index][item_index] -= SCORE_OTHER
     elif winner not in (player, DRAW, None):
-        # meaning that the other player has won the game
+        # the other player has won the game
         for row_index, row in enumerate(list_board):
             for item_index, item in enumerate(row):
                 if item == player:
@@ -130,22 +124,8 @@ print(mc_move(provided.TTTBoard(4, False,
                                  [provided.EMPTY, provided.PLAYERX, provided.PLAYERO, provided.PLAYERO]]),
               provided.PLAYERX, NTRIALS))
 
-# mc_update_scores(scores, board, PLAYERX)
-# print(scores)
 
-# print(mc_move(board,PLAYERX,1))
-# mc_trail(board, PLAYERX)
-# # print(create_board_as_list(board))
-# print("score grid before:")
-# print(scores)
-# (mc_update_scores(scores, board, PLAYERX))
-# print("score grid after:")
-# print(scores)
-# print(get_best_move(board, scores))
-
-# Test game with the console or the GUI.  Uncomment whichever
-# you prefer.  Both should be commented out when you submit
-# for testing to save time.
-
-# provided.play_game(mc_move, NTRIALS, False)
+# Test game with the console or the GUI.
+print("new game")
+provided.play_game(mc_move, NTRIALS, False)
 # poc_ttt_gui.run_gui(3, provided.PLAYERX, mc_move, NTRIALS, False)
